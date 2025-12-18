@@ -83,6 +83,8 @@ final class StateRegistration extends AbstractDocument
      */
     public function __construct(string $number, StateRegistration\StateInterface $state)
     {
+        $len = $state->getLength();
+        $number = strlen($number) < $len ? str_pad($number, $len, '0', STR_PAD_LEFT) : $number;
         $number = $state->normalizeNumber($number);
         $this->state = $state;
         parent::__construct($number, $state->getLength(), $state->getNumberOfDigits(), $state->getState());
